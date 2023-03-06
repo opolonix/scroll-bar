@@ -22,8 +22,10 @@ class ScrollBar {
                 caret.style.width = '16px'
             }
             else caret.style.width = '2px'
-            if (drag_caret == true && event.screenY-72 > 0 && event.screenY-72 < window.innerHeight){
-                console.log(event.screenY-72)
+            if (drag_caret == true && event.screenY - 74 > 0 && event.screenY - 74 < window.innerHeight){
+                var scroll_caret = (event.screenY - 74) / (window.innerHeight) * (window.innerHeight - caret.offsetHeight - 4)
+                caret_container.style = `padding-top: ${scroll_caret}px`
+                // window.scrollTo(0, (event.screenY) / window.innerHeight * scrollHeight);
             }
         })
         document.addEventListener('mousedown', (event) => {
@@ -31,8 +33,11 @@ class ScrollBar {
             if (until_right <= 16){
                 event.preventDefault()
                 drag_caret = true
-                caret.style.transition = '.2s background-color'
+                caret.style.transition = '.2s'
                 caret.style.backgroundColor = '#fafafa70'
+                var scroll_caret = (event.screenY - 72) / window.innerHeight * (window.innerHeight - caret.offsetHeight - 4)
+                caret_container.style = `padding-top: ${scroll_caret}px`
+                // window.scrollTo(0, (event.screenY) / window.innerHeight * scrollHeight);
             }
             else{drag_caret = false}
         })
